@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import ContactInfo from "./components/sections/ContactInfo";
 
 export const metadata: Metadata = {
   title: "dr-teresinska.pl",
@@ -8,11 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
+return (
     <html lang="pl">
       <body>
         <Header />
-        <main>{children}</main>
+        {children}
+        <ContactInfo />
+        <Footer />
       </body>
     </html>
   );
