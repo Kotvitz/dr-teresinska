@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ContactInfo from "./components/sections/ContactInfo";
+import CookieSettingsButton from "./components/cookies/CookieSettingsButton";
+import ConsentScripts from "./components/cookies/ConsentScripts";
 
 export const metadata: Metadata = {
   title: "dr-teresinska.pl",
@@ -17,6 +19,8 @@ return (
         {children}
         <ContactInfo />
         <Footer />
+        <CookieSettingsButton />
+        <ConsentScripts />
       </body>
     </html>
   );
