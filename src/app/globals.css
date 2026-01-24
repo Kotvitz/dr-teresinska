@@ -93,7 +93,7 @@
     margin-right: auto;
   }
 
-  .policy-content h1 {
+  .policy-content h1, .heading-underline {
     position: relative;
 
     padding-bottom: 0.75rem;
@@ -108,7 +108,7 @@
     text-align: center;
   }
 
-  .policy-content h1::after {
+  .policy-content h1::after, .heading-underline::after {
     content: "";
     position: absolute;
     left: 0;
