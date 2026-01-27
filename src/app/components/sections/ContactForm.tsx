@@ -142,7 +142,7 @@ export default function ContactForm() {
           (*) - Pozycje obowiązkowe
         </p>
 
-        <label className="flex cursor-pointer items-start gap-3 text-sm text-(--text-muted)">
+        <label className="flex items-start gap-3 text-sm text-(--text-muted)">
           <input
             type="checkbox"
             checked={consent}
@@ -155,7 +155,7 @@ export default function ContactForm() {
             przeze mnie danych osobowych na zasadach opisanych w Polityce prywatności dostępnej w Serwisie. Oświadczam, że są mi znane
             cele przetwarzania danych oraz moje uprawnienia. Niniejsza zgoda może być wycofana w dowolnym czasie poprzez kontakt z
             Administratorem pod adresem info@dr-teresinska.pl, bez wpływu na zgodność z prawem przetwarzania, którego dokonano na
-            podstawie zgody przed jej cofnięciem. Więcej informacji dotyczących przetwarzania danych osobowych - Obowiązek Informacyjny.
+            podstawie zgody przed jej cofnięciem. Więcej informacji dotyczących przetwarzania danych osobowych - <a className="font-medium text-(--brand) hover:text-(--brand-ink) hover:underline underline-offset-4 transition-colors duration-150" href="/obowiazek-informacyjny">Obowiązek Informacyjny</a>.
           </span>
         </label>
 
