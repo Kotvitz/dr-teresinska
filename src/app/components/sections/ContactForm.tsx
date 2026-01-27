@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-const TO_EMAIL = "kontakt@dr-teresinska.pl";
+type Status = "idle" | "sending" | "success" | "error";
 
 function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
   return (
@@ -19,6 +19,11 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
 
+  const [website, setWebsite] = useState("");
+
+  const [status, setStatus] = useState<Status>("idle");
+
+
   const isValid = useMemo(() => {
     if (!name.trim()) return false;
     if (!email.trim() || !email.includes("@")) return false;
@@ -27,25 +32,38 @@ export default function ContactForm() {
     return true;
   }, [name, email, message, consent]);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValid) return;
+    if (!isValid || status === "sending") return;
 
-    const subject = encodeURIComponent("Wiadomość z dr-teresinska.pl");
-    const body = encodeURIComponent(
-      [
-        `Imię i nazwisko: ${name}`,
-        `E-mail: ${email}`,
-        phone.trim() ? `Telefon: ${phone}` : null,
-        "",
-        "Wiadomość:",
-        message,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    );
+    setStatus("sending");
 
-    window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          message,
+          consent,
+          website,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+      setConsent(false);
+      setWebsite("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -55,6 +73,17 @@ export default function ContactForm() {
       </h2>
 
       <form onSubmit={onSubmit} className="mt-6 space-y-5">
+        <input
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+        />
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-2">
             <FieldLabel htmlFor="name">Imię i nazwisko *</FieldLabel>
@@ -132,16 +161,28 @@ export default function ContactForm() {
 
         <button
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || status === "sending"}
           className={[
             "w-full rounded-md px-6 py-3 text-sm font-semibold text-white transition",
-            isValid
+            isValid && status !== "sending"
               ? "cursor-pointer bg-(--brand) hover:bg-(--brand-ink)"
               : "cursor-not-allowed bg-gray-300",
           ].join(" ")}
         >
-          Wyślij wiadomość
+          {status === "sending" ? "Wysyłanie…" : "Wyślij wiadomość"}
         </button>
+        
+         {status === "success" && (
+          <p className="text-sm font-semibold text-(--brand-ink)">
+            Dziękujemy! Wiadomość została wysłana.
+          </p>
+        )}
+
+        {status === "error" && (
+          <p className="text-sm font-semibold text-red-600">
+            Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń.
+          </p>
+        )}
       </form>
     </section>
   );
