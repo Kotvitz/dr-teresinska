@@ -5,6 +5,7 @@ import Footer from "./components/layout/Footer";
 import ContactInfo from "./components/sections/ContactInfo";
 import CookieSettingsButton from "./components/cookies/CookieSettingsButton";
 import ConsentScripts from "./components/cookies/ConsentScripts";
+import PracticeLocationButton from "./components/ui/PracticeLocationButton";
 
 export const metadata: Metadata = {
   title: "Dr Teresińska - Specjalistka otorynolaryngologii, foniatrii i audiologii",
@@ -21,6 +22,7 @@ return (
         <Footer />
         <CookieSettingsButton />
         <ConsentScripts />
+        <PracticeLocationButton />
       </body>
     </html>
   );
