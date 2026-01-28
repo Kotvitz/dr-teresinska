@@ -8,7 +8,7 @@ export default function Hero() {
           min-h-75
           max-h-140
           w-full
-          bg-(--brand-tint)
+          bg-(--brand-light-strong)
         "
       />
     </section>

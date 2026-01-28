@@ -4,9 +4,8 @@
   --brand: #0f766e;
   --brand-ink: #0b4f4b;
 
-  --brand-tint-strong: rgba(15, 118, 110, 0.12);
-  --brand-tint: rgba(15, 118, 110, 0.08);
-  --brand-tint-soft: rgba(15, 118, 110, 0.05);
+  --brand-light: #e6f3f1;
+  --brand-light-strong: #d1ebe7;
 
   --brand-border: rgba(15, 118, 110, 0.25);
 
@@ -28,11 +27,13 @@
     @apply max-w-7xl mx-auto px-6;
   }
 
-   .header-tint {
-    background-color: var(--brand-tint);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--brand-border);
+  .header-tint {
+    background: linear-gradient(
+      to bottom,
+      var(--brand-light),
+      var(--brand-light-strong)
+    );
+    border-bottom: 1px solid var(--border);
   }
 
   .header-accent {
@@ -41,7 +42,11 @@
   }
 
   .mobile-menu-tint {
-    background-color: var(--brand-tint-soft);
+    background: linear-gradient(
+      to bottom,
+      var(--brand-light),
+      var(--brand-light-strong)
+    );
     border-top: 1px solid var(--brand-border);
   }
 
