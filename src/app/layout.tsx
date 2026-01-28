@@ -7,8 +7,8 @@ import CookieSettingsButton from "./components/cookies/CookieSettingsButton";
 import ConsentScripts from "./components/cookies/ConsentScripts";
 
 export const metadata: Metadata = {
-  title: "dr-teresinska.pl",
-  description: "…",
+  title: "Dr Teresińska - Specjalistka otorynolaryngologii, foniatrii i audiologii",
+  description: "Dr n. med. Elżbieta A. Teresińska w Szczecinie to laryngolog, foniatra, audiolog, logopeda. Zapraszamy do kontaktu!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

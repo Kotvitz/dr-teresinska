@@ -3,7 +3,7 @@ import SpecializationsIntro from "../components/sections/SpecializationsIntro";
 import SpecializationsGroups from "../components/sections/SpecializationsGroups";
 
 export const metadata: Metadata = {
-  title: "Specjalizacje – laryngologia, audiologia i foniatria (Szczecin)",
+  title: "Specjalizacje - Dr Teresińska",
   description:
     "Zakres konsultacji i leczenia: choroby uszu, zaburzenia słuchu, zawroty głowy i szumy uszne oraz zaburzenia głosu i mowy.",
 };

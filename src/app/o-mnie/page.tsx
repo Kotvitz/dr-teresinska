@@ -3,7 +3,7 @@ import AboutMain from "../components/sections/AboutMain";
 import AboutCertificates from "../components/sections/AboutCerificates";
 
 export const metadata: Metadata = {
-  title: "O mnie – Dr n. med. Elżbieta A. Teresińska (Szczecin)",
+  title: "O mnie – Dr Teresińska",
   description:
     "Dr n. med. Elżbieta A. Teresińska – otorynolaryngolog, foniatra i audiolog w Szczecinie. Informacje o gabinecie, podejściu do pacjenta oraz certyfikatach.",
   robots: { index: true, follow: true },

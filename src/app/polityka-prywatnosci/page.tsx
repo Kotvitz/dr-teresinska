@@ -3,7 +3,7 @@ import path from "node:path";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Polityka prywatności | dr-teresinska.pl",
+  title: "Dr Teresińska - Polityka prywatności",
   description: "Informacje o przetwarzaniu danych osobowych i prawach użytkownika serwisu dr-teresinska.pl.",
   robots: { index: true, follow: true },
 };

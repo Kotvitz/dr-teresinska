@@ -6,9 +6,8 @@ import ContactForm from "../components/sections/ContactForm";
 
 
 export const metadata: Metadata = {
-  title: "Kontakt – Dr n. med. Elżbieta A. Teresińska (Szczecin)",
-  description:
-    "Kontakt do gabinetu: adres, telefon, godziny przyjęć oraz formularz kontaktowy. Umów wizytę w Szczecinie.",
+  title: "Kontakt - Dr Teresińska",
+  description: "Szukasz specjalisty w Szczecinie? Skontaktuj się z dr n. med. Elżbietą A. Teresińską, oferującą diagnostykę i leczenie chrypek, badania głosu i słuchu.",
   robots: { index: true, follow: true },
 };
 
