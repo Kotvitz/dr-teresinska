@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ContactInfo from "./components/sections/ContactInfo";
-import CookieSettingsButton from "./components/cookies/CookieSettingsButton";
+import CookieSettingsButton from "./components/ui/CookieSettingsButton";
 import ConsentScripts from "./components/cookies/ConsentScripts";
 import PracticeLocationButton from "./components/ui/PracticeLocationButton";
 

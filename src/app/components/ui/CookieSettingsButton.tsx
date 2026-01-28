@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import CookieSettingsModal from "./CookieSettingsModal";
-import { getConsent } from "./cookieConsent";
+import { getConsent } from "../cookies/cookieConsent";
+import CookieSettingsModal from "../cookies/CookieSettingsModal";
 
 
 export default function CookieSettingsButton() {
