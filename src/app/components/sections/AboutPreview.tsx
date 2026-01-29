@@ -4,7 +4,7 @@ export default function AboutPreview() {
       <div className="container-page">
         <div className="max-w-3xl">
           <h1 className="text-3xl font-extrabold leading-tight text-(--text) md:text-4xl">
-            Prywatny gabinet otorynolaryngologii i foniatryczny – Szczecin
+            Otolaryngolog • foniatra • audiolog – Szczecin
           </h1>
 
           <p className="mt-4 text-lg font-semibold text-(--brand-ink) md:text-xl">

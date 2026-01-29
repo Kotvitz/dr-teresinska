@@ -2,7 +2,7 @@ export default function AboutMain() {
   return (
     <section>
       <h1 className="heading-underline">
-        Prywatny gabinet otorynolaryngologii i foniatrii – Szczecin
+        Otolaryngolog • foniatra • audiolog – Szczecin
       </h1>
 
       <p className="mt-4 text-lg font-semibold text-(--brand-ink) md:text-xl">
