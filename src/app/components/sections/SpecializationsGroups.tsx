@@ -18,6 +18,16 @@ const GROUPS = [
       "Chrypka i zanikanie głosu",
       "Zaburzenia głosu u dzieci i dorosłych",
       "Ostre i przewlekłe zapalenia krtani i tchawicy",
+      "Zaburzenia mowy",
+      "Zaburzenia rozwoju mowy i języka",
+      "Dysleksja",
+      "Dysfagia (zaburzenia połykania)"
+    ],
+  },
+    {
+    title: "Inne schorzenia",
+    items: [
+      "Choroby górnych dróg oddechowych"
     ],
   },
 ];
@@ -26,7 +36,7 @@ export default function SpecializationsGroups() {
   return (
     <section className="mt-12">
       <h2 className="heading-underline text-2xl font-bold text-(--text)">
-        Zakres konsultacji
+        Zakres specjalizacji
       </h2>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
