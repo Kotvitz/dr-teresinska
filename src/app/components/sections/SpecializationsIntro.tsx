@@ -3,7 +3,7 @@ export default function SpecializationsIntro() {
     <section className="grid gap-8 md:grid-cols-2 md:items-center">
       <div>
         <h1 className="heading-underline text-3xl font-extrabold text-(--text) md:text-4xl">
-          Specjalizacje – laryngologia, audiologia i foniatria
+          Specjalizacje – otolaryngologia, audiologia i foniatria
         </h1>
 
         <p className="mt-5 text-base leading-7 text-(--text-muted)">
