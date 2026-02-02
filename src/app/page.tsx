@@ -10,8 +10,8 @@ export default function HomePage() {
       <main className="scroll-smooth">
         <Hero />
         <AboutPreview />
-        <ServicesPreview />
-        <DiagnosticsPreview />
+        <ServicesPreview imageSrc="/section-image-1.webp"/>
+        <DiagnosticsPreview imageSrc="/section-image-2.webp" />
         <VisitCta />
       </main>
     </>
