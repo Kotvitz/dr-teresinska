@@ -5,17 +5,23 @@ import { useEffect, useState } from "react";
 import { getConsent, type ConsentState } from "./cookieConsent";
 
 export default function ConsentScripts() {
-  const [consent, setConsent] = useState<ConsentState>(() => getConsent());
+  const [consent, setConsent] = useState<ConsentState | null>(() => getConsent());
 
   useEffect(() => {
     const update = () => setConsent(getConsent());
     window.addEventListener("consent:update", update);
-    return () => window.removeEventListener("consent:update", update);
+    window.addEventListener("storage", update);
+
+    return () => {
+      window.removeEventListener("consent:update", update);
+      window.removeEventListener("storage", update);
+    };
   }, []);
 
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
   const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
+  if (!consent) return null;
 
   return (
     <>

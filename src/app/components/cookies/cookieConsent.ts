@@ -4,26 +4,42 @@ export type ConsentState = {
   marketing: boolean;
 };
 
-const KEY = "cookie_consent_v1";
+export const CONSENT_KEY = "cookie_consent_v1";
 
-export function getConsent(): ConsentState {
-  if (typeof window === "undefined") return { necessary: true, analytics: false, marketing: false };
+export function getConsent(): ConsentState | null {
+  if (typeof window === "undefined") return null;
 
   try {
-    const raw = window.localStorage.getItem(KEY);
-    if (!raw) return { necessary: true, analytics: false, marketing: false };
-    const parsed = JSON.parse(raw);
+    const raw = window.localStorage.getItem(CONSENT_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as Partial<ConsentState>;
     return {
       necessary: true,
       analytics: Boolean(parsed.analytics),
       marketing: Boolean(parsed.marketing),
     };
   } catch {
-    return { necessary: true, analytics: false, marketing: false };
+    return null;
   }
 }
 
-export function setConsent(consent: ConsentState) {
+
+export function setConsent(consent: Omit<ConsentState, "necessary"> & { necessary?: true }) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(KEY, JSON.stringify(consent));
+
+  const normalized: ConsentState = {
+    necessary: true,
+    analytics: Boolean(consent.analytics),
+    marketing: Boolean(consent.marketing),
+  };
+
+  window.localStorage.setItem(CONSENT_KEY, JSON.stringify(normalized));
+  window.dispatchEvent(new Event("consent:update"));
+}
+
+export function clearConsent() {
+  if (typeof window === "undefined") return;
+  window.localStorage.removeItem(CONSENT_KEY);
+  window.dispatchEvent(new Event("consent:update"));
 }

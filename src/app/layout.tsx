@@ -4,6 +4,8 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ContactInfo from "./components/sections/ContactInfo";
 import CookieSettingsButton from "./components/ui/CookieSettingsButton";
+import CookieBanner from "./components/ui/CookieBanner";
+import CookieBlockingOverlay from "./components/cookies/CookieBlockingOverlay";
 import ConsentScripts from "./components/cookies/ConsentScripts";
 import PracticeLocationButton from "./components/ui/PracticeLocationButton";
 
@@ -20,6 +22,8 @@ return (
         {children}
         <ContactInfo />
         <Footer />
+        <CookieBlockingOverlay />
+        <CookieBanner />
         <CookieSettingsButton />
         <ConsentScripts />
         <PracticeLocationButton />

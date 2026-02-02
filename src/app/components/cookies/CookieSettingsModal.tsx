@@ -32,13 +32,12 @@ export default function CookieSettingsModal({
   if (!open) return null;
 
   const save = () => {
-    persistConsent(consent);
+    persistConsent({ analytics: consent.analytics, marketing: consent.marketing });
     onClose();
-    window.dispatchEvent(new Event("consent:update"));
   };
 
   return (
-    <div className="fixed inset-0 z-70">
+    <div className="fixed inset-0 z-9992">
       <button
         aria-label="Zamknij okno ustawień cookies"
         className="absolute inset-0 bg-black/40"
