@@ -1,5 +1,5 @@
 const MAP_PLACE_URL =
-  "https://www.google.com/maps/place/Teresi%C5%84ska+El%C5%BCbieta,+dr+nauk+med.+otolaryngolog.+Spec.+foniatra,+audiolog/@53.3765028,14.6575629,17z";
+  "https://www.google.com/maps/place/Teresi%C5%84ska+El%C5%BCbieta,+dr+nauk+med.+otolaryngolog.+Spec.+foniatra,+audiolog/@53.37649,14.6550041,17z/data=!3m2!4b1!5s0x4700a7c7bf60c76d:0x9e983d254d991935!4m6!3m5!1s0x4700a7c7c0672d05:0x9ca1e80acb75c87a!8m2!3d53.37649!4d14.657579!16s%2Fg%2F1tks507p?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D";
 
 const MAP_EMBED_URL =
   "https://www.google.com/maps?q=Teresi%C5%84ska+El%C5%BCbieta,+dr+nauk+med.+otolaryngolog.+Spec.+foniatra,+audiolog&output=embed";
