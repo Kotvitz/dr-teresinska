@@ -83,13 +83,22 @@ export async function POST(req: Request) {
     .filter(Boolean)
     .join("\n");
 
-  await transporter.sendMail({
-    from: `"${SMTP_FROM_NAME ?? "dr-teresinska.pl"}" <${SMTP_FROM_EMAIL}>`,
-    to: CONTACT_TO_EMAIL,
-    replyTo: data.email,
-    subject,
-    text,
-  });
+  try {
+    await transporter.sendMail({
+      from: `"${SMTP_FROM_NAME ?? "dr-teresinska.pl"}" <${SMTP_FROM_EMAIL}>`,
+      to: CONTACT_TO_EMAIL,
+      replyTo: data.email,
+      subject,
+      text,
+    });
 
-  return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("SMTP sendMail failed:", err);
+
+    return NextResponse.json(
+      { ok: false, error: "Email send failed" },
+      { status: 500 }
+    );
+  }
 }
