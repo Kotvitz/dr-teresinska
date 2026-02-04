@@ -1,4 +1,4 @@
-const GROUPS = [
+const DEFAULT_GROUPS = [
   {
     title: "Choroby uszu",
     items: [
@@ -21,34 +21,43 @@ const GROUPS = [
       "Zaburzenia mowy",
       "Zaburzenia rozwoju mowy i języka",
       "Dysleksja",
-      "Dysfagia (zaburzenia połykania)"
+      "Dysfagia (zaburzenia połykania)",
     ],
   },
-    {
+  {
     title: "Inne schorzenia",
-    items: [
-      "Choroby górnych dróg oddechowych"
-    ],
+    items: ["Choroby górnych dróg oddechowych"],
   },
 ];
 
-export default function SpecializationsGroups() {
+type Props = {
+  data?: {
+    title?: string;
+    groups?: Array<{ title?: string; items?: string[] }>;
+  };
+};
+
+export default function SpecializationsGroups({ data }: Props) {
+  const title = data?.title ?? "Zakres specjalizacji";
+  const groups =
+    data?.groups?.length ? data.groups : DEFAULT_GROUPS;
+
   return (
     <section className="mt-12">
       <h2 className="heading-underline text-2xl font-bold text-(--text)">
-        Zakres specjalizacji
+        {title}
       </h2>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
-        {GROUPS.map((g) => (
+        {groups.map((g, idx) => (
           <div
-            key={g.title}
+            key={g.title ?? `group-${idx}`}
             className="rounded-2xl border border-(--border) bg-white p-6 shadow-sm"
           >
             <h3 className="text-lg font-bold text-(--text)">{g.title}</h3>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-(--text-muted)">
-              {g.items.map((item) => (
-                <li key={item}>{item}</li>
+              {(g.items ?? []).map((item, itemIdx) => (
+                <li key={`${g.title ?? `group-${idx}`}-${itemIdx}`}>{item}</li>
               ))}
             </ul>
           </div>
