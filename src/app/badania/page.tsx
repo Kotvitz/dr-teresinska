@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function TestsPage() {
   return (
     <main className="container-page py-12">
-      <TestsIntro />
+      <TestsIntro imageSrc="/photo-tests.webp"/>
       <TestsScope />
       <MostCommonTests />
       <VisitFlow />
