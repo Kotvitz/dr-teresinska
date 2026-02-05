@@ -21,6 +21,24 @@ export default defineType({
           title: "Podtytuł",
           type: "string",
         }),
+
+        defineField({
+          name: "photo",
+          title: "Zdjęcie profilowe",
+          type: "image",
+          options: { hotspot: true },
+          description:
+            "Opcjonalnie. Jeśli jest puste, użyte zostanie domyślne zdjęcie z /public.",
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt (SEO)",
+              type: "string",
+              validation: (Rule) => Rule.max(120),
+            }),
+          ],
+        }),
+
         defineField({
           name: "paragraphs",
           title: "Akapity",

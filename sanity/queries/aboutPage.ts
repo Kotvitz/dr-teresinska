@@ -1,4 +1,3 @@
-// src/sanity/queries/aboutPage.ts
 import { groq } from "next-sanity";
 
 export const aboutPageQuery = groq`
@@ -6,7 +5,15 @@ export const aboutPageQuery = groq`
   main{
     title,
     subtitle,
-    paragraphs
+    paragraphs,
+    photo{
+      alt,
+      asset->{
+        _id,
+        url,
+        metadata{ dimensions{ width, height } }
+      }
+    }
   },
   certificates{
     title,
