@@ -1,18 +1,17 @@
-import { type SchemaTypeDefinition } from 'sanity'
-import siteSettings from './siteSettings';
 import homePage from "./homePage";
-import aboutPage from './aboutPage';
-import specializationsPage from './specializationsPage';
-import testsPage from './testsPage';
-import legalPage from './legalPage';
+import aboutPage from "./aboutPage";
+import specializationsPage from "./specializationsPage";
+import testsPage from "./testsPage";
+import legalPage from "./legalPage";
+import siteSettings from "./siteSettings";
+import contactPage from "./contactPage"; 
 
-export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    siteSettings,
-    homePage,
-    aboutPage,
-    specializationsPage,
-    testsPage,
-    legalPage
-  ],
-}
+export const schemaTypes = [
+  siteSettings,
+  homePage,
+  aboutPage,
+  specializationsPage,
+  testsPage,
+  legalPage,
+  contactPage,
+];
