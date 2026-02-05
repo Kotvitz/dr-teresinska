@@ -8,19 +8,23 @@ import CookieBanner from "./components/ui/CookieBanner";
 import CookieBlockingOverlay from "./components/cookies/CookieBlockingOverlay";
 import ConsentScripts from "./components/cookies/ConsentScripts";
 import PracticeLocationButton from "./components/ui/PracticeLocationButton";
+import { client } from "../../sanity/lib/client";
+import { siteSettingsQuery } from "../../sanity/queries/siteSettings";
 
 export const metadata: Metadata = {
   title: "Dr Teresińska - Specjalistka otorynolaryngologii, foniatrii i audiologii",
   description: "Dr n. med. Elżbieta A. Teresińska w Szczecinie to laryngolog, foniatra, audiolog, logopeda. Zapraszamy do kontaktu!",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-return (
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteSettings = await client.fetch(siteSettingsQuery).catch(() => null);
+
+  return (
     <html lang="pl">
       <body>
         <Header />
         {children}
-        <ContactInfo />
+        <ContactInfo data={siteSettings ?? undefined} />
         <Footer />
         <CookieBlockingOverlay />
         <CookieBanner />

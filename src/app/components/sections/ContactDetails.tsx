@@ -6,17 +6,26 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 
+type ContactDetailsData = {
+  title?: string;
+  addressLine?: string;
+  addressCity?: string;
+  phone?: string;
+  email?: string;
+  openingHours?: string[];
+};
+
 type Props = {
-  data?: {
-    title?: string;
-    addressLine?: string;
-    addressCity?: string;
-    phoneLabel?: string;
-    phoneHref?: string;
-    emailLabel?: string;
-    emailHref?: string;
-    hours?: string[];
-  };
+  data?: ContactDetailsData;
+};
+
+const FALLBACK = {
+  title: "Prywatny gabinet laryngologiczny i audiologiczny - Dr n. med. Elżbieta A. Teresińska",
+  addressLine: "ul. Kostki Napierskiego 6c",
+  addressCity: "70-783 Szczecin",
+  phone: "+48 501 008 509",
+  email: "info@dr-teresinska.pl",
+  openingHours: ["Pn – Pt: 9:00 – 17:00"],
 };
 
 function Row({
@@ -42,18 +51,19 @@ function Row({
 }
 
 export default function ContactDetails({ data }: Props) {
-  const title = data?.title ?? "Dane kontaktowe";
+  const title = data?.title ?? FALLBACK.title;
 
-  const addressLine = data?.addressLine ?? "ul. Kostki Napierskiego 6c";
-  const addressCity = data?.addressCity ?? "70-783 Szczecin";
+  const addressLine = data?.addressLine ?? FALLBACK.addressLine;
+  const addressCity = data?.addressCity ?? FALLBACK.addressCity;
 
-  const phoneLabel = data?.phoneLabel ?? "+48 501 008 509";
-  const phoneHref = data?.phoneHref ?? "tel:+48501008509";
+  const phone = data?.phone ?? FALLBACK.phone;
+  const email = data?.email ?? FALLBACK.email;
 
-  const emailLabel = data?.emailLabel ?? "kontakt@dr-teresinska.pl";
-  const emailHref = data?.emailHref ?? "mailto:kontakt@dr-teresinska.pl";
+  const openingHours =
+    data?.openingHours?.length ? data.openingHours : FALLBACK.openingHours;
 
-  const hours = data?.hours?.length ? data.hours : ["Pn–Pt: 9:00–17:00"];
+  const phoneHref = `tel:${phone.replace(/\s+/g, "")}`;
+  const emailHref = `mailto:${email}`;
 
   return (
     <section className="rounded-2xl border border-(--border) bg-white p-6 shadow-sm">
@@ -69,23 +79,20 @@ export default function ContactDetails({ data }: Props) {
 
         <Row icon={<PhoneIcon className="h-5 w-5" />} label="Telefon">
           <a className="nav-link font-semibold text-(--brand-ink)" href={phoneHref}>
-            {phoneLabel}
+            {phone}
           </a>
         </Row>
 
         <Row icon={<EnvelopeIcon className="h-5 w-5" />} label="E-mail">
           <a className="nav-link font-semibold text-(--brand-ink)" href={emailHref}>
-            {emailLabel}
+            {email}
           </a>
         </Row>
 
         <Row icon={<ClockIcon className="h-5 w-5" />} label="Godziny przyjęć">
           <div className="space-y-1">
-            {hours.map((line, idx) => (
-              <div key={`${line}-${idx}`}>
-                <span className="font-semibold text-(--text)">{line.split(":")[0]}:</span>{" "}
-                {line.includes(":") ? line.split(":").slice(1).join(":").trim() : ""}
-              </div>
+            {openingHours.map((line, idx) => (
+              <div key={`${line}-${idx}`}>{line}</div>
             ))}
           </div>
         </Row>

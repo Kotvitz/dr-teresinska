@@ -26,62 +26,6 @@ export default defineType({
     }),
 
     defineField({
-      name: "details",
-      title: "Dane kontaktowe",
-      type: "object",
-      fields: [
-        defineField({
-          name: "title",
-          title: "Tytuł sekcji",
-          type: "string",
-          validation: (Rule) => Rule.required(),
-          initialValue: "Dane kontaktowe",
-        }),
-        defineField({
-          name: "addressLine",
-          title: "Adres – linia 1",
-          type: "string",
-        }),
-        defineField({
-          name: "addressCity",
-          title: "Adres – miasto / kod",
-          type: "string",
-        }),
-        defineField({
-          name: "phoneLabel",
-          title: "Telefon – etykieta",
-          type: "string",
-          initialValue: "+48 501 008 509",
-        }),
-        defineField({
-          name: "phoneHref",
-          title: "Telefon – link (tel:)",
-          type: "string",
-          initialValue: "tel:+48501008509",
-        }),
-        defineField({
-          name: "emailLabel",
-          title: "E-mail – etykieta",
-          type: "string",
-          initialValue: "kontakt@dr-teresinska.pl",
-        }),
-        defineField({
-          name: "emailHref",
-          title: "E-mail – link (mailto:)",
-          type: "string",
-          initialValue: "mailto:kontakt@dr-teresinska.pl",
-        }),
-        defineField({
-          name: "hours",
-          title: "Godziny przyjęć",
-          type: "array",
-          of: [{ type: "string" }],
-          description: 'Np. "Pn–Pt: 9:00–17:00"',
-        }),
-      ],
-    }),
-
-    defineField({
       name: "map",
       title: "Mapa",
       type: "object",
