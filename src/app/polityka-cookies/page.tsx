@@ -1,16 +1,27 @@
-import fs from "node:fs";
-import path from "node:path";
 import type { Metadata } from "next";
+import { client } from "../../../sanity/lib/client";
+import { legalPageBySlugQuery } from "../../../sanity/queries/legalPage";
 
-export const metadata: Metadata = {
-  title: "Dr Teresińska - Polityka cookies",
-  description: "Informacje o stosowaniu plików cookies w serwisie dr-teresinska.pl, ich rodzajach, celach wykorzystania oraz możliwościach zarządzania ich ustawieniami.",
-  robots: { index: true, follow: true },
-};
+const SLUG = "polityka-cookies";
 
-export default function CookiesPolicyPage() {
-  const filePath = path.join(process.cwd(), "src/content/policies/polityka-cookies.html");
-  const html = fs.readFileSync(filePath, "utf8");
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await client.fetch(legalPageBySlugQuery, { slug: SLUG }).catch(() => null);
+
+  return {
+    title: data?.metaTitle ?? "Dr Teresińska – Polityka cookies",
+    description:
+      data?.metaDescription ??
+      "Informacje o stosowaniu plików cookies w serwisie dr-teresinska.pl, ich rodzajach, celach wykorzystania oraz możliwościach zarządzania.",
+    robots: { index: true, follow: true },
+  };
+}
+
+export default async function CookiesPolicyPage() {
+  const data = await client.fetch(legalPageBySlugQuery, { slug: SLUG }).catch(() => null);
+
+  const html =
+    data?.html ??
+    "<h1>Polityka cookies</h1><p>Treść w przygotowaniu.</p>";
 
   return (
     <main className="container-page py-12">
