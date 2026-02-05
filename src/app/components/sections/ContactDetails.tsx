@@ -1,3 +1,4 @@
+import React from "react";
 import {
   MapPinIcon,
   PhoneIcon,
@@ -5,14 +6,18 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 
-const PHONE = "+48 501 008 509";
-const PHONE_HREF = "tel:+48501008509";
-
-const EMAIL = "kontakt@dr-teresinska.pl";
-const EMAIL_HREF = "mailto:kontakt@dr-teresinska.pl";
-
-const ADDRESS_LINE = "ul. Kostki Napierskiego 6c";
-const ADDRESS_CITY = "70-783 Szczecin";
+type Props = {
+  data?: {
+    title?: string;
+    addressLine?: string;
+    addressCity?: string;
+    phoneLabel?: string;
+    phoneHref?: string;
+    emailLabel?: string;
+    emailHref?: string;
+    hours?: string[];
+  };
+};
 
 function Row({
   icon,
@@ -36,37 +41,52 @@ function Row({
   );
 }
 
-export default function ContactDetails() {
+export default function ContactDetails({ data }: Props) {
+  const title = data?.title ?? "Dane kontaktowe";
+
+  const addressLine = data?.addressLine ?? "ul. Kostki Napierskiego 6c";
+  const addressCity = data?.addressCity ?? "70-783 Szczecin";
+
+  const phoneLabel = data?.phoneLabel ?? "+48 501 008 509";
+  const phoneHref = data?.phoneHref ?? "tel:+48501008509";
+
+  const emailLabel = data?.emailLabel ?? "kontakt@dr-teresinska.pl";
+  const emailHref = data?.emailHref ?? "mailto:kontakt@dr-teresinska.pl";
+
+  const hours = data?.hours?.length ? data.hours : ["Pn–Pt: 9:00–17:00"];
+
   return (
     <section className="rounded-2xl border border-(--border) bg-white p-6 shadow-sm">
       <h2 className="heading-underline text-2xl font-bold text-(--text)">
-        Dane kontaktowe
+        {title}
       </h2>
 
       <address className="mt-6 space-y-5 not-italic">
         <Row icon={<MapPinIcon className="h-5 w-5" />} label="Adres">
-          <div className="font-semibold text-(--text)">{ADDRESS_LINE}</div>
-          <div>{ADDRESS_CITY}</div>
+          <div className="font-semibold text-(--text)">{addressLine}</div>
+          <div>{addressCity}</div>
         </Row>
 
         <Row icon={<PhoneIcon className="h-5 w-5" />} label="Telefon">
-          <a
-            className="nav-link font-semibold text-(--brand-ink)"
-            href={PHONE_HREF}
-          >
-            {PHONE}
+          <a className="nav-link font-semibold text-(--brand-ink)" href={phoneHref}>
+            {phoneLabel}
           </a>
         </Row>
 
         <Row icon={<EnvelopeIcon className="h-5 w-5" />} label="E-mail">
-          <a className="nav-link font-semibold text-(--brand-ink)" href={EMAIL_HREF}>
-            {EMAIL}
+          <a className="nav-link font-semibold text-(--brand-ink)" href={emailHref}>
+            {emailLabel}
           </a>
         </Row>
 
         <Row icon={<ClockIcon className="h-5 w-5" />} label="Godziny przyjęć">
-          <div>
-            <span className="font-semibold text-(--text)">Pn–Pt:</span> 9:00–17:00
+          <div className="space-y-1">
+            {hours.map((line, idx) => (
+              <div key={`${line}-${idx}`}>
+                <span className="font-semibold text-(--text)">{line.split(":")[0]}:</span>{" "}
+                {line.includes(":") ? line.split(":").slice(1).join(":").trim() : ""}
+              </div>
+            ))}
           </div>
         </Row>
       </address>

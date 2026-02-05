@@ -4,6 +4,18 @@ import { useMemo, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+type Props = {
+  data?: {
+    title?: string;
+    requiredNote?: string;
+    submitIdle?: string;
+    submitSending?: string;
+    successMessage?: string;
+    errorMessage?: string;
+    consentText?: string[];
+  };
+};
+
 function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
   return (
     <label htmlFor={htmlFor} className="text-sm font-semibold text-(--text)">
@@ -12,17 +24,31 @@ function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.Re
   );
 }
 
-export default function ContactForm() {
+export default function ContactForm({ data }: Props) {
+  const formTitle = data?.title ?? "Formularz kontaktowy";
+  const requiredNote = data?.requiredNote ?? "(*) - Pozycje obowiązkowe";
+  const submitIdle = data?.submitIdle ?? "Wyślij wiadomość";
+  const submitSending = data?.submitSending ?? "Wysyłanie…";
+  const successMessage = data?.successMessage ?? "Dziękujemy! Wiadomość została wysłana.";
+  const errorMessage =
+    data?.errorMessage ?? "Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń.";
+
+  const consentLines =
+    data?.consentText?.length
+      ? data.consentText
+      : [
+          "Zapoznałem się z Polityką prywatności serwisu dr-teresinska.pl oraz wyrażam zgodę na przetwarzanie przez ELŻBIETA TERESIŃSKA, ul. Aleksandra Kostki Napierskiego 6C, 70-783 Szczecin, udostępnionych przeze mnie danych osobowych na zasadach opisanych w Polityce prywatności dostępnej w Serwisie.",
+          "Oświadczam, że są mi znane cele przetwarzania danych oraz moje uprawnienia. Niniejsza zgoda może być wycofana w dowolnym czasie poprzez kontakt z Administratorem pod adresem info@dr-teresinska.pl, bez wpływu na zgodność z prawem przetwarzania, którego dokonano na podstawie zgody przed jej cofnięciem.",
+          "Więcej informacji dotyczących przetwarzania danych osobowych -",
+        ];
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
-
   const [website, setWebsite] = useState("");
-
   const [status, setStatus] = useState<Status>("idle");
-
 
   const isValid = useMemo(() => {
     if (!name.trim()) return false;
@@ -42,14 +68,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          message,
-          consent,
-          website,
-        }),
+        body: JSON.stringify({ name, email, phone, message, consent, website }),
       });
 
       if (!res.ok) throw new Error("Request failed");
@@ -69,7 +88,7 @@ export default function ContactForm() {
   return (
     <section className="rounded-2xl border border-(--border) bg-white p-6 shadow-sm">
       <h2 className="heading-underline text-2xl font-bold text-(--text)">
-        Formularz kontaktowy
+        {formTitle}
       </h2>
 
       <form onSubmit={onSubmit} className="mt-6 space-y-5">
@@ -138,9 +157,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <p className="text-sm text-(--text-muted)">
-          (*) - Pozycje obowiązkowe
-        </p>
+        <p className="text-sm text-(--text-muted)">{requiredNote}</p>
 
         <label className="flex items-start gap-3 text-sm text-(--text-muted)">
           <input
@@ -151,11 +168,19 @@ export default function ContactForm() {
             required
           />
           <span>
-            Zapoznałem się z Polityką prywatności serwisu <strong>dr-teresinska.pl</strong> oraz wyrażam zgodę na przetwarzanie przez <strong>ELŻBIETA TERESIŃSKA</strong>, <strong>ul. Aleksandra Kostki Napierskiego 6C, 70-783 Szczecin</strong>, udostępnionych
-            przeze mnie danych osobowych na zasadach opisanych w Polityce prywatności dostępnej w Serwisie. Oświadczam, że są mi znane
-            cele przetwarzania danych oraz moje uprawnienia. Niniejsza zgoda może być wycofana w dowolnym czasie poprzez kontakt z
-            Administratorem pod adresem info@dr-teresinska.pl, bez wpływu na zgodność z prawem przetwarzania, którego dokonano na
-            podstawie zgody przed jej cofnięciem. Więcej informacji dotyczących przetwarzania danych osobowych - <a className="font-medium text-(--brand) hover:text-(--brand-ink) hover:underline underline-offset-4 transition-colors duration-150" href="/obowiazek-informacyjny">Obowiązek Informacyjny</a>.
+            {consentLines.map((line, idx) => (
+              <span key={`${idx}-${line}`}>
+                {line}{" "}
+                {idx === consentLines.length - 1 ? (
+                  <a
+                    className="font-medium text-(--brand) hover:text-(--brand-ink) hover:underline underline-offset-4 transition-colors duration-150"
+                    href="/obowiazek-informacyjny"
+                  >
+                    Obowiązek Informacyjny
+                  </a>
+                ) : null}
+              </span>
+            ))}
           </span>
         </label>
 
@@ -169,19 +194,17 @@ export default function ContactForm() {
               : "cursor-not-allowed bg-gray-300",
           ].join(" ")}
         >
-          {status === "sending" ? "Wysyłanie…" : "Wyślij wiadomość"}
+          {status === "sending" ? submitSending : submitIdle}
         </button>
-        
-         {status === "success" && (
+
+        {status === "success" && (
           <p className="text-sm font-semibold text-(--brand-ink)">
-            Dziękujemy! Wiadomość została wysłana.
+            {successMessage}
           </p>
         )}
 
         {status === "error" && (
-          <p className="text-sm font-semibold text-red-600">
-            Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń.
-          </p>
+          <p className="text-sm font-semibold text-red-600">{errorMessage}</p>
         )}
       </form>
     </section>
