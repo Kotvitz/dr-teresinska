@@ -12,7 +12,6 @@ type Props = {
     submitSending?: string;
     successMessage?: string;
     errorMessage?: string;
-    consentText?: string[];
   };
 };
 
@@ -32,15 +31,6 @@ export default function ContactForm({ data }: Props) {
   const successMessage = data?.successMessage ?? "Dziękujemy! Wiadomość została wysłana.";
   const errorMessage =
     data?.errorMessage ?? "Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń.";
-
-  const consentLines =
-    data?.consentText?.length
-      ? data.consentText
-      : [
-          "Zapoznałem się z Polityką prywatności serwisu dr-teresinska.pl oraz wyrażam zgodę na przetwarzanie przez ELŻBIETA TERESIŃSKA, ul. Aleksandra Kostki Napierskiego 6C, 70-783 Szczecin, udostępnionych przeze mnie danych osobowych na zasadach opisanych w Polityce prywatności dostępnej w Serwisie.",
-          "Oświadczam, że są mi znane cele przetwarzania danych oraz moje uprawnienia. Niniejsza zgoda może być wycofana w dowolnym czasie poprzez kontakt z Administratorem pod adresem info@dr-teresinska.pl, bez wpływu na zgodność z prawem przetwarzania, którego dokonano na podstawie zgody przed jej cofnięciem.",
-          "Więcej informacji dotyczących przetwarzania danych osobowych -",
-        ];
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -168,19 +158,15 @@ export default function ContactForm({ data }: Props) {
             required
           />
           <span>
-            {consentLines.map((line, idx) => (
-              <span key={`${idx}-${line}`}>
-                {line}{" "}
-                {idx === consentLines.length - 1 ? (
-                  <a
-                    className="font-medium text-(--brand) hover:text-(--brand-ink) hover:underline underline-offset-4 transition-colors duration-150"
-                    href="/obowiazek-informacyjny"
-                  >
-                    Obowiązek Informacyjny
-                  </a>
-                ) : null}
-              </span>
-            ))}
+            Zapoznałem się z Polityką prywatności serwisu <strong>dr-teresinska.pl</strong> oraz wyrażam zgodę na
+            przetwarzanie przez <strong>ELŻBIETA TERESIŃSKA</strong>, <strong>ul. Aleksandra Kostki Napierskiego 6C,
+            70-783 Szczecin</strong>, udostępnionych przeze mnie danych osobowych na zasadach opisanych w
+            Polityce prywatności dostępnej w Serwisie. Oświadczam, że są mi znane cele przetwarzania danych oraz
+            moje uprawnienia. Niniejsza zgoda może być wycofana w dowolnym czasie poprzez kontakt z Administratorem
+            pod adresem <strong> <a href="mailto:info@dr-teresinska.pl">info@dr-teresinska.pl</a></strong>, bez wpływu na zgodność z prawem przetwarzania, którego dokonano na
+            podstawie zgody przed jej cofnięciem. Więcej informacji dotyczących przetwarzania danych osobowych - 
+            <a className="font-medium text-(--brand) hover:text-(--brand-ink) hover:underline underline-offset-4 transition-colors duration-150"
+            href="/obowiazek-informacyjny">Obowiązek Informacyjny</a>.
           </span>
         </label>
 
