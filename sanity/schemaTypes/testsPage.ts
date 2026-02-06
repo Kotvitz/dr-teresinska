@@ -4,6 +4,120 @@ export default defineType({
   name: "testsPage",
   title: "Badania",
   type: "document",
+
+  initialValue: {
+    intro: {
+      title: "Badania audiologiczne i laryngologiczne – Szczecin",
+      text:
+        "W gabinecie wykonywana jest diagnostyka słuchu, głosu oraz dróg oddechowych. " +
+        "Dobór badań zależy od objawów i wieku pacjenta – każde badanie poprzedza wywiad, " +
+        "a wyniki są omawiane wraz z zaleceniami.",
+      imageAlt: "Ilustracja przedstawiająca badania słuchu i diagnostykę",
+    },
+
+    scope: {
+      title: "Zakres badań i konsultacji",
+      cards: [
+        {
+          title: "Diagnostyka słuchu",
+          items: [
+            "Audiometria i tympanometria",
+            "Badania obiektywne: BERA i OAE",
+            "Badania przesiewowe słuchu",
+          ],
+        },
+        {
+          title: "Diagnostyka głosu i dróg oddechowych",
+          items: [
+            "Videostroboskopia krtani",
+            "Videoendoskopia (krtań/nos/uszy)",
+            "Nasofaryngoskopia (nosogardło)",
+          ],
+        },
+        {
+          title: "Najczęstsze wskazania",
+          items: [
+            "Niedosłuch, szumy uszne",
+            "Chrypka i zaburzenia głosu",
+            "Nawracające infekcje, zatoki",
+            "Zawroty głowy",
+          ],
+        },
+      ],
+    },
+
+    mostCommon: {
+      title: "Najczęściej wykonywane badania",
+      left: {
+        title: "Badania słuchu i dróg oddechowych",
+        items: [
+          {
+            name: "Audiometria tonalna",
+            desc: "Ocena progu słyszenia na różnych częstotliwościach (audiogram).",
+          },
+          {
+            name: "Audiometria mowy",
+            desc: "Ocena rozumienia mowy – przydatna m.in. w dalszej diagnostyce i zaleceniach.",
+          },
+          {
+            name: "Tympanometria",
+            desc: "Ocena ucha środkowego i ruchomości błony bębenkowej.",
+          },
+          {
+            name: "OAE",
+            desc: "Obiektywna ocena funkcji ślimaka (komórek słuchowych) – także u dzieci.",
+          },
+          {
+            name: "BERA",
+            desc: "Obiektywna ocena drogi słuchowej – możliwa również u najmłodszych pacjentów.",
+          },
+        ],
+      },
+      right: {
+        title: "Badania głosu",
+        items: [
+          {
+            name: "Videoendoskopia",
+            desc: "Ocena krtani/nosa/uszu w badaniu endoskopowym.",
+          },
+          {
+            name: "Videostroboskopia krtani",
+            desc: "Ocena pracy fałdów głosowych (np. przy chrypce i przeciążeniu głosu).",
+          },
+          {
+            name: "Nasofaryngoskopia",
+            desc: "Ocena nosogardła (m.in. u dzieci – np. w kierunku przerostu migdałka gardłowego).",
+          },
+        ],
+        note:
+          "W przypadku problemów z głosem (np. chrypka, zmęczenie głosu, przeciążenia u osób mówiących zawodowo) " +
+          "dobierana jest diagnostyka oraz dalsze zalecenia.",
+      },
+    },
+
+    visitFlow: {
+      title: "Jak wygląda wizyta?",
+      steps: [
+        {
+          title: "1. Wywiad",
+          text: "Pytania o objawy, historię leczenia i potrzeby pacjenta.",
+        },
+        {
+          title: "2. Dobór badań",
+          text: "Badania dobierane są do wieku i problemu (słuch / głos / drogi oddechowe).",
+        },
+        {
+          title: "3. Omówienie wyników",
+          text: "Wyniki są tłumaczone i omawiane wraz z dalszym planem postępowania.",
+        },
+      ],
+      cta: {
+        label: "Przejdź do kontaktu →",
+        href: "/kontakt",
+      },
+    },
+  },
+
   fields: [
     defineField({
       name: "intro",
@@ -230,5 +344,6 @@ export default defineType({
       ],
     }),
   ],
+
   preview: { prepare: () => ({ title: "Badania" }) },
 });

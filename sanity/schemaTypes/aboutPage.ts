@@ -4,6 +4,24 @@ export default defineType({
   name: "aboutPage",
   title: "O mnie",
   type: "document",
+
+  initialValue: {
+    main: {
+      title: "Otolaryngolog • foniatra • audiolog – Szczecin",
+      subtitle: "Dr n. med. Elżbieta A. Teresińska",
+      paragraphs: [
+        "Specjalistka otorynolaryngologii, foniatrii i audiologii z wieloletnim doświadczeniem klinicznym i dydaktycznym. Zajmuje się diagnostyką i leczeniem zaburzeń głosu, mowy, słuchu oraz chorób uszu, nosa i gardła — zarówno u dzieci, jak i dorosłych.",
+        "W praktyce łączy podejście medyczne z holistycznym spojrzeniem na potrzeby pacjenta, współpracując z logopedami i terapeutami głosu. Specjalizuje się również w badaniach słuchu noworodków oraz opiece foniatrycznej dla osób zawodowo pracujących głosem.",
+      ],
+    },
+
+    certificates: {
+      title: "Certyfikaty",
+      text:
+        "Poniżej znajduje się wybór certyfikatów i potwierdzeń uczestnictwa w szkoleniach oraz konferencjach.",
+    },
+  },
+
   fields: [
     defineField({
       name: "main",
@@ -70,5 +88,8 @@ export default defineType({
       ],
     }),
   ],
-  preview: { prepare: () => ({ title: "O mnie" }) },
+
+  preview: {
+    prepare: () => ({ title: "O mnie" }),
+  },
 });

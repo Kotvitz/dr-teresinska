@@ -4,6 +4,17 @@ export default defineType({
   name: "siteSettings",
   title: "Ustawienia strony",
   type: "document",
+
+  initialValue: {
+    clinicName: "Prywatny gabinet laryngologiczny i audiologiczny - Dr n. med. Elżbieta A. Teresińska",
+    addressLine: "ul. Kostki Napierskiego 6C",
+    addressCity: "70-783 Szczecin",
+    nip: "8512038228",
+    phone: "+48 501 008 509",
+    email: "info@dr-teresinska.pl",
+    openingHours: ["Pn–Pt: 9:00–17:00"],
+  },
+
   fields: [
     defineField({
       name: "clinicName",
@@ -47,6 +58,7 @@ export default defineType({
       of: [{ type: "string" }],
     }),
   ],
+
   preview: {
     prepare() {
       return { title: "Ustawienia strony (globalne)" };

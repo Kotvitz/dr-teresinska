@@ -5,8 +5,74 @@ export default defineType({
   title: "Strona główna",
   type: "document",
 
-  fields: [
+  initialValue: {
+    hero: {
+      alt: "Gabinet otolaryngologiczny – Szczecin",
+    },
 
+    aboutPreview: {
+      title: "Otolaryngolog • foniatra • audiolog – Szczecin",
+      subtitle: "Dr n. med. Elżbieta A. Teresińska",
+      text:
+        "Konsultacje laryngologiczne i foniatryczne oraz diagnostyka słuchu i głosu u dzieci i dorosłych.",
+      cta: {
+        label: "Dowiedz się więcej →",
+        href: "/o-mnie",
+      },
+    },
+
+    servicesPreview: {
+      title: "Specjalizacje",
+      text:
+        "Krótki przegląd obszarów konsultacji. Szczegółowy opis znajduje się na stronie Specjalizacje.",
+      items: [
+        "Laryngologia",
+        "Audiologia",
+        "Foniatria",
+        "Zaburzenia głosu",
+        "Opieka nad dziećmi",
+        "Opieka nad dorosłymi",
+      ],
+      cta: {
+        label: "Zobacz więcej →",
+        href: "/specjalizacje",
+      },
+      imageAlt:
+        "Ilustracja przedstawiająca zakres usług otolaryngologicznych i foniatrycznych",
+    },
+
+    diagnosticsPreview: {
+      title: "Badania",
+      text:
+        "Najczęściej wykonywane badania. Pełna lista badań wraz z opisem znajduje się na stronie Badania.",
+      items: [
+        "Audiometria tonalna",
+        "Audiometria mowy",
+        "Tympanometria",
+        "OAE",
+        "BERA",
+        "Badania przesiewowe słuchu",
+      ],
+      cta: {
+        label: "Pełna lista →",
+        href: "/badania",
+      },
+      imageAlt:
+        "Ilustracja przedstawiająca diagnostykę słuchu i badania audiologiczne",
+    },
+
+    visitCta: {
+      title: "Zapytaj o szczegóły wizyty!",
+      text:
+        "Skontaktuj się z nami — odpowiemy, jakie badania mogą być potrzebne.",
+      button: {
+        label: "Szczegóły kontaktu",
+        href: "/kontakt",
+      },
+    },
+  },
+
+  fields: [
     defineField({
       name: "hero",
       title: "Hero",
@@ -233,6 +299,8 @@ export default defineType({
   ],
 
   preview: {
-    prepare: () => ({ title: "Strona główna" }),
-  },
+    prepare() {
+      return { title: "Strona główna" };
+    },
+  }
 });

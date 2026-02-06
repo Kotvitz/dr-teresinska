@@ -4,6 +4,49 @@ export default defineType({
   name: "specializationsPage",
   title: "Specjalizacje",
   type: "document",
+
+  initialValue: {
+    intro: {
+      title: "Specjalizacje – otolaryngologia, audiologia i foniatria",
+      text:
+        "Poniżej znajduje się przegląd najczęstszych problemów, z którymi pacjenci zgłaszają się do gabinetu. Każdego pacjenta traktuję indywidualnie, starannie analizując objawy i dobierając najlepszą metodę leczenia. Zapraszam na konsultację – wspólnie znajdziemy skuteczne rozwiązanie Twojego problemu.",
+    },
+    groupsSection: {
+      title: "Zakres specjalizacji",
+      groups: [
+        {
+          title: "Choroby uszu",
+          items: [
+            "Choroby ucha zewnętrznego",
+            "Choroby ucha środkowego",
+            "Choroby ucha wewnętrznego",
+            "Niedosłuchy przewodzeniowe i odbiorcze",
+            "Głuchota przewodzeniowa i czuciowo-nerwowa",
+            "Nagła głuchota",
+            "Zawroty głowy",
+            "Szumy uszne (gwizdy, dzwonienie)",
+          ],
+        },
+        {
+          title: "Zaburzenia głosu i mowy",
+          items: [
+            "Chrypka i zanikanie głosu",
+            "Zaburzenia głosu u dzieci i dorosłych",
+            "Ostre i przewlekłe zapalenia krtani i tchawicy",
+            "Zaburzenia mowy",
+            "Zaburzenia rozwoju mowy i języka",
+            "Dysleksja",
+            "Dysfagia (zaburzenia połykania)",
+          ],
+        },
+        {
+          title: "Inne schorzenia",
+          items: ["Choroby górnych dróg oddechowych"],
+        },
+      ],
+    },
+  },
+
   fields: [
     defineField({
       name: "intro",
@@ -79,5 +122,8 @@ export default defineType({
       ],
     }),
   ],
-  preview: { prepare: () => ({ title: "Specjalizacje" }) },
+
+  preview: {
+    prepare: () => ({ title: "Specjalizacje" }),
+  },
 });
