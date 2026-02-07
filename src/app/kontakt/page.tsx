@@ -5,6 +5,7 @@ import ContactMap from "../components/sections/ContactMap";
 import ContactForm from "../components/sections/ContactForm";
 import { client } from "../../../sanity/lib/client";
 import { siteSettingsQuery } from "../../../sanity/queries/siteSettings";
+import { contactPageQuery } from "../../../sanity/queries/contactPage";
 
 export const metadata: Metadata = {
   title: "Kontakt - Dr Teresińska",
@@ -14,7 +15,13 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactPage() {
-  const siteSettings = await client.fetch(siteSettingsQuery).catch(() => null);
+  const siteSettings = await client.fetch(siteSettingsQuery);
+  const contactPage = await client.fetch(contactPageQuery);
+
+  const contactDetailsData = {
+    ...siteSettings,
+    emails: contactPage?.emails,
+  };
 
   return (
     <main className="container-page py-12">
@@ -23,7 +30,7 @@ export default async function ContactPage() {
 
         <section className="mt-10 grid gap-8 md:grid-cols-2">
           <div className="space-y-8">
-            <ContactDetails data={siteSettings ?? undefined} />
+            <ContactDetails data={contactDetailsData} />
             <ContactMap />
           </div>
 

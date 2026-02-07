@@ -11,7 +11,10 @@ type ContactDetailsData = {
   addressLine?: string;
   addressCity?: string;
   phone?: string;
-  email?: string;
+  emails?: {
+    label: string;
+    href: string;
+  }[];
   openingHours?: string[];
 };
 
@@ -24,7 +27,16 @@ const FALLBACK = {
   addressLine: "ul. Kostki Napierskiego 6c",
   addressCity: "70-783 Szczecin",
   phone: "+48 501 008 509",
-  email: "info@dr-teresinska.pl",
+  emails: [
+    {
+      label: "kontakt@dr-teresinska.pl",
+      href: "mailto:kontakt@dr-teresinska.pl",
+    },
+    {
+      label: "info@dr-teresinska.pl",
+      href: "mailto:info@dr-teresinska.pl",
+    },
+  ],
   openingHours: ["Pn – Pt: 9:00 – 17:00"],
 };
 
@@ -57,13 +69,12 @@ export default function ContactDetails({ data }: Props) {
   const addressCity = data?.addressCity ?? FALLBACK.addressCity;
 
   const phone = data?.phone ?? FALLBACK.phone;
-  const email = data?.email ?? FALLBACK.email;
+  const emails = data?.emails?.length ? data.emails : FALLBACK.emails;
 
   const openingHours =
     data?.openingHours?.length ? data.openingHours : FALLBACK.openingHours;
 
   const phoneHref = `tel:${phone.replace(/\s+/g, "")}`;
-  const emailHref = `mailto:${email}`;
 
   return (
     <section className="rounded-2xl border border-(--border) bg-white p-6 shadow-sm">
@@ -84,9 +95,17 @@ export default function ContactDetails({ data }: Props) {
         </Row>
 
         <Row icon={<EnvelopeIcon className="h-5 w-5" />} label="E-mail">
-          <a className="nav-link font-semibold text-(--brand-ink)" href={emailHref}>
-            {email}
-          </a>
+          <div className="space-y-1">
+            {emails.map((email, idx) => (
+              <a
+                key={`${email.href}-${idx}`}
+                href={email.href}
+                className="block nav-link font-semibold text-(--brand-ink)"
+              >
+                {email.label}
+              </a>
+            ))}
+          </div>
         </Row>
 
         <Row icon={<ClockIcon className="h-5 w-5" />} label="Godziny przyjęć">

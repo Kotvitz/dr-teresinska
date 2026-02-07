@@ -55,6 +55,41 @@ export default defineType({
     }),
 
     defineField({
+      name: "emails",
+      title: "Adresy e-mail (tylko strona Kontakt)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "emailItem",
+          fields: [
+            defineField({
+              name: "label",
+              title: "E-mail (tekst)",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "href",
+              title: "Link (mailto:)",
+              type: "string",
+              validation: (Rule) =>
+                Rule.regex(/^mailto:/i, "Link musi zaczynać się od mailto:"),
+            }),
+          ],
+          preview: { select: { title: "label" } },
+        },
+      ],
+      validation: (Rule) => Rule.min(1),
+      initialValue: [
+        { label: "info@dr-teresinska.pl", href: "mailto:info@dr-teresinska.pl" },
+        { label: "dr-teresinska@dr-teresinska.pl", href: "mailto:dr-teresinska@dr-teresinska.pl" },
+      ],
+      description:
+        "Te adresy e-mail są używane wyłącznie w podstronie Kontakt. Globalny e-mail w stopce pochodzi z Ustawień strony.",
+    }),
+
+    defineField({
       name: "map",
       title: "Mapa",
       type: "object",

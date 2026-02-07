@@ -18,6 +18,10 @@ export const contactPageQuery = groq`
     successMessage,
     errorMessage,
     consentText
+  },
+  emails[]{
+    label,
+    href
   }
 }
 `;
