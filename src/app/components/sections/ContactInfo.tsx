@@ -40,7 +40,7 @@ export default function ContactInfo({ data }: { data?: SiteSettings }) {
   return (
     <section className="bg-(--surface-muted) py-14">
       <div className="container-page">
-        <h2 className="text-xl font-bold text-(--text)">Contact</h2>
+        <h2 className="text-xl font-bold text-(--text)">Kontakt</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <address className="not-italic text-sm text-(--text-muted)">
