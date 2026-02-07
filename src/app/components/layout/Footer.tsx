@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="border-t border-(--border) py-6">
       <div className="container-page flex flex-col gap-4 text-sm text-(--text-muted) md:flex-row md:items-center md:justify-between">
         <span>
-          Wszelkie prawa zastrzeżone © {new Date().getFullYear()} Michał Kotfica
+          Wszelkie prawa zastrzeżone © {new Date().getFullYear()} Elżbieta Teresińska
         </span>
 
         <nav className="flex gap-4">
