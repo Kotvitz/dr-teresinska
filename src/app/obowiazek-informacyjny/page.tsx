@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import { client } from "../../../sanity/lib/client";
 import { legalPageBySlugQuery } from "../../../sanity/queries/legalPage";
@@ -17,11 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function InformationObligationPage() {
+  const filePath = path.join(process.cwd(), "src/content/obowiazek-informacyjny.html");
   const data = await client.fetch(legalPageBySlugQuery, { slug: SLUG }).catch(() => null);
 
-  const html =
-    data?.html ??
-    "<h1>Obowiązek Informacyjny</h1><p>Treść w przygotowaniu.</p>";
+  const html = data?.contentHtml ?? fs.readFileSync(filePath, "utf8");
 
   return (
     <main className="container-page py-12">
