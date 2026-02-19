@@ -23,7 +23,7 @@ type Props = {
 };
 
 const FALLBACK = {
-  title: "Prywatny gabinet laryngologiczny i audiologiczny - Dr n. med. Elżbieta A. Teresińska",
+  title: "Prywatny gabinet otorynolaryngologii i foniatryczny - Dr n. med. Elżbieta A. Teresińska",
   addressLine: "ul. Kostki Napierskiego 6c",
   addressCity: "70-783 Szczecin",
   phone: "+48 501 008 509",
